@@ -1,0 +1,29 @@
+<header class="text-gray-600 body-font">
+  <div class="max-w-6xl mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+      <!-- logo -->
+      <span class="text-xl text-transparent" style="text-shadow: 0 0 0 black;">РЕ⚡В {{ title }}</span>
+    </a>
+    <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-5 hover:text-gray-900" href="{% url 'LandingView' %}">Главная</a>
+      <a class="mr-5 hover:text-gray-900" href="{% url 'NewsList' %}">Новости</a>
+      <a class="mr-5 hover:text-gray-900" href="{% url 'ProfileView' %}">Профиль</a>
+      <a class="hover:text-gray-900" href="{% url 'RatingView' %}">Рейтинг</a>
+    </nav>
+    <div class="">
+      <a target="_blank" href="https://t.me/don_rave">
+        <button class="inline-flex items-center bg-gray-200 text-base  border-0 py-3 px-3 mr-1 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">
+          <i class="far fa-bell"></i>
+        </button>
+      </a>
+      <a target="_blank" href="https://t.me/don_rave_bot">
+        <button class="inline-flex items-center bg-gray-900 text-white border-0 py-2 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Играть
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </a>
+    </div>
+
+  </div>
+</header>

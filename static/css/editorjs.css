@@ -1,0 +1,38 @@
+article blockquote cite {
+  display: block;
+  font-weight: 300;
+  text-align: end;
+}
+
+article .alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+article .alert__title {
+  font-weight: 800;
+}
+
+article img::after {
+  content: attr(alt);
+}
+
+article .delimiter {
+  border-top: 3px dotted #bbb;
+  width: 50%;
+  margin: auto;
+}
+
+article img {
+  margin: auto;
+}
+
+/* IMGS */
+.stretched {
+
+}
+.withBackground {
+
+}

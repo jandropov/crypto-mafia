@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRYPTO MAFIA - Не авторизован</title>
+<!--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">-->
+    <link href="{% static "css/style2.css" %}" rel="stylesheet">
+      <script src="https://cdn.tailwindcss.com"></script>
+
+
+  </head>
+  <body class="bg-black">
+    <section class="py-20 bg-black">
+        <div class="flex flex-col px-4 mx-auto pb-12 my-auto text-center max-w-7xl sm:px-6 lg:px-8 justify-center">
+          <div class="glitch black" id="rave">
+              <div class="glitch__item"></div>
+              <div class="glitch__item"></div>
+              <div class="glitch__item"></div>
+              <div class="glitch__item"></div>
+              <div class="glitch__item"></div>
+          </div>
+            <p class="max-w-md mx-auto mt-3 leading-relaxed md:mt-5 md:text-lg md:max-w-3xl text-white">
+                Чтобы получить доступ в свой профиль, перейдите в телеграм-бот и следуйте инструкциям
+            </p>
+            <div class="flex flex-row justify-center mt-8 space-x-3">
+              <a href="#" onclick="history.go(-1)">
+                <button class="inline-flex items-center bg-neutral-700 text-white border-0 py-2 px-4 mr-1 focus:outline-none hover:bg-neutral-600 rounded text-base mt-4 md:mt-0">
+                  Назад
+                </button>
+              </a>
+              <a target="_blank" href="https://t.me/don_rave_bot">
+                <button class="inline-flex items-center bg-gray-200 text-black border-0 py-2 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">Перейти в бот
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </button>
+              </a>
+            </div>
+        </div>
+    </section>
+  </body>
+</html>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-18/GlitchPass.js'></script>
+<script src="{% static "js/rave.js" %}"></script>

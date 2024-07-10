@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load editorjs %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} | РЕ⚡В - Новости</title>
+    <link href="{% static 'css/editorjs.css' %}" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@tailwindcss/typography@0.4.x/dist/typography.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" crossorigin="anonymous"/>
+
+</head>
+<body>
+{# {{ article.body_editorjs | editorjs}} #}
+  {% include "components/header.html" with title="| Новости" %}
+  <article>
+    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+      <div class="text-center lg:w-2/3 w-full">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{ article.title }}</h1>
+        <p class="mb-8 leading-relaxed">{{ article.description }}</p>
+        <hr class="pb-12">
+      </div>
+      <div class="lg:w-2/3 w-full">
+        <div class="prose" style="max-width:none;">
+          {{ article.body_editorjs | editorjs}}
+        </div>
+        <hr class="mt-8 mb-4">
+        <div class="pb-2">
+          <p class="">Чтобы быть вкурсе последних новостей подпишись на наш <a target="_blank" href="https://t.me/don_rave">
+            <button class="inline-flex items-center bg-gray-50 text-base border-0 py-1 px-3 focus:outline-none hover:bg-gray-100 rounded text-base mt-4 md:mt-0">Телеграм-канал
+            </button>
+          </a></p>
+
+        </div>
+
+        <a href="{% url 'NewsList' %}">
+          <button class="inline-flex items-center bg-gray-100 border-0 py-3 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-2">
+            <i class="fas fa-arrow-left pr-2"></i>
+            Назад к новостям
+          </button>
+        </a>
+
+      </div>
+
+    </div>
+  </article>
+</body>
+</html>
