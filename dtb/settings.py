@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'tgbot.apps.TgbotConfig',
     'news',
     'quests',
-     "django_nextjs",
 ]
 
 MIDDLEWARE = [

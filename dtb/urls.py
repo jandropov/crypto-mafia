@@ -9,10 +9,9 @@ def trigger_error(request):
 
 urlpatterns = [
     path('', include('landing.urls')),
-    path("", include("django_nextjs.urls")),
     path('tghook/', include('tgbot.urls')),
     path('tgadmin/', admin.site.urls),
-    path('news/', include('news.urls')),
+#     path('news/', include('news.urls')),
     path('me/', include('quests.urls')),
     path('editorjs/', include('django_editorjs_fields.urls')),
     path('sentry-debug/', trigger_error),
