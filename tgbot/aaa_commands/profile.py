@@ -28,7 +28,7 @@ async def get_profile(update: Update, context) -> None:
     await save_in_db(u)
 
     keyboard = [
-            [InlineKeyboardButton("🥷 Профиль", web_app = WebAppInfo(url='https://c4b2-2a09-bac1-7500-30-00-49-b3.ngrok-free.app/me/token/'+token_gen))],
+            [InlineKeyboardButton("🥷 Профиль", web_app = WebAppInfo(url='http://app.crypto-mafia.xyz:8000/me/token/'+token_gen))],
         ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
