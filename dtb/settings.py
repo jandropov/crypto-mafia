@@ -180,23 +180,3 @@ if TELEGRAM_TOKEN is None:
     sys.exit(1)
 
 TELEGRAM_LOGS_CHAT_ID = os.getenv("TELEGRAM_LOGS_CHAT_ID", default=None)
-
-# -----> SENTRY
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-from sentry_sdk.integrations.celery import CeleryIntegration
-from sentry_sdk.integrations.redis import RedisIntegration
-
-sentry_sdk.init(
-    dsn="https://6e8b514de7684b2ea68f8a694bdb4c65@o913352.ingest.sentry.io/6051303",
-    integrations=[
-        DjangoIntegration(),
-        CeleryIntegration(),
-        RedisIntegration(),
-    ],
-    traces_sample_rate=0.1,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
