@@ -1,22 +1,44 @@
 import datetime
 
 from django.utils import timezone
-from telegram import ParseMode, Update
+
+from telegram import Update, WebAppInfo
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+
 
 from tgbot.models import User
 from django.contrib.auth.models import User as DjangoUser
+from asgiref.sync import sync_to_async
 
-def get_profile(update: Update, context) -> None:
+@sync_to_async
+def get_user_in_db(update, context):
     u = User.get_user(update, context)
+    return u
+
+@sync_to_async
+def save_in_db(u):
+    return u.save()
+
+
+async def get_profile(update: Update, context) -> None:
+    u = await get_user_in_db(update, context)
 
     token_gen = DjangoUser.objects.make_random_password()
     u.session_token = token_gen
-    u.save()
+    await save_in_db(u)
 
-    update.message.reply_text('🥷 Профиль\n'+\
-                            '├Cсылка на твой профиль: <b><a href="https://don-rave.com/me/token/'+token_gen+'">ТЫЦ!</a></b>\n'+\
-                            '└Длительность сессии - <b>5 минут</b>',
-                            parse_mode='HTML')
+    keyboard = [
+            [InlineKeyboardButton("🥷 Профиль", web_app = WebAppInfo(url='https://c4b2-2a09-bac1-7500-30-00-49-b3.ngrok-free.app/me/token/'+token_gen))],
+        ]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+
+    await update.message.reply_text('🥷 Мы позаботились о твоей конспирации:\n'+\
+                            '├Длительность сессии - <b>5 минут</b>\n'+\
+                            '└Одноразовая ссылка.'+\
+                            '\n\nДля повторного входа воспользуйся кнопкой.',
+                            parse_mode='HTML', reply_markup=reply_markup)
 
     # Создает инлайн клаву
     # update.message.reply_text(text=text,
