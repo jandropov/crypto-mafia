@@ -26,7 +26,6 @@ services:
     volumes:
       - .:/code
       - /var/www/static/:/var/www/static/
-      - /var/certbot/conf:/etc/letsencrypt/:ro
 #    ports:
 #      - "8000:8000"
     expose:
@@ -39,12 +38,15 @@ services:
   nginx:
     image: nginx:alpine
     restart: unless-stopped
+    build: ./nginx/
     ports:
       - "80:80"
       - "443:443"
+    env_file: .env
     volumes:
       - /var/www/static/:/var/www/static/
       - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - www-certs:/etc/letsencrypt
     depends_on:
       - web
 
