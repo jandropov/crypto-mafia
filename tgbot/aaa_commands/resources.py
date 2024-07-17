@@ -1,15 +1,23 @@
 import datetime
 
 from django.utils import timezone
-from telegram import ParseMode, Update
+from telegram import Update
 
 from tgbot.models import User
 from django.contrib.auth.models import User as DjangoUser
+from asgiref.sync import sync_to_async
 
-def get_links(update: Update, context) -> None:
+
+@sync_to_async
+def get_user_in_db(update, context):
     u = User.get_user(update, context)
+    return u
 
-    update.message.reply_text("💡 Информация:\n\n"\
+
+async def get_links(update: Update, context) -> None:
+    u = await get_user_in_db(update, context)
+
+    await update.message.reply_text("💡 Информация:\n\n"\
                               "Игра призвана отсеять слабых и выделить лучших, наградить участников адреналином, весельем и хорошим настроением. "\
                               "Также в игре присутсвуют неплохие финансовые вознаграждения, благодаря которым ты можешь хорошо подзаработать.\n"\
                               "Этот бот является ключом в твой личный профиль, где ты увидишь список заданий и вознаграждений.\n"\

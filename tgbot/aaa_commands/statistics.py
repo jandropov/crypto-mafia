@@ -1,13 +1,20 @@
 import datetime
 
 from django.utils import timezone
-from telegram import ParseMode, Update
+from telegram import Update
 
 from tgbot.models import User
 from django.contrib.auth.models import User as DjangoUser
+from asgiref.sync import sync_to_async
 
-def get_stat(update: Update, context) -> None:
+
+@sync_to_async
+def get_user_in_db(update, context):
     u = User.get_user(update, context)
+    return u
+
+async def get_stat(update: Update, context) -> None:
+    u = await get_user_in_db(update, context)
 
     identificator = str(u.identificator)
     score = str(u.score_num)
@@ -15,10 +22,10 @@ def get_stat(update: Update, context) -> None:
     quests_done_num = str(u.quests_done_num)
 
 
-    update.message.reply_text("📟 Статистика:\n"+\
+    await update.message.reply_text("📟 Статистика:\n"+\
                               "├🎮Игрок: <b>" + identificator +'</b>'+\
-                         "\n├🎲Очки: <b>" + score +'</b>'+\
-                       "\n├💴Рубли: <b>" + rub_num +'</b>'+\
+                         "\n├🎲Авторитет: <b>" + score +'</b>'+\
+                       "\n├💴Токены: <b>" + rub_num +'</b>'+\
                "\n└✔️Квесты: <b>" + quests_done_num+'</b>',
                parse_mode="HTML")
 

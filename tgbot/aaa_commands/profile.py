@@ -28,17 +28,18 @@ async def get_profile(update: Update, context) -> None:
     await save_in_db(u)
 
     keyboard = [
-            [InlineKeyboardButton("🥷 Профиль", web_app = WebAppInfo(url='http://app.crypto-mafia.xyz:8000/me/token/'+token_gen))],
+            [InlineKeyboardButton("🥷 Профиль", url = "https://f102-2a09-bac5-31cc-369-00-57-157.ngrok-free.app:8000/me/token/"+token_gen)],
         ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
 
-    await update.message.reply_text('🥷 Мы позаботились о твоей конспирации:\n'+\
+    await update.message.reply_text('🥷 Профиль:\n'+\
+                            '├Cсылка на твой профиль: <b><a href="http://app.crypto-mafia.xyz:8000/me/token/'+token_gen+'">ТЫЦ!</a></b>\n'+\
                             '├Длительность сессии - <b>5 минут</b>\n'+\
-                            '└Одноразовая ссылка.'+\
+                            '└Ccылка одноразовая.'+\
                             '\n\nДля повторного входа воспользуйся кнопкой.',
-                            parse_mode='HTML', reply_markup=reply_markup)
+                            parse_mode='HTML',)
 
     # Создает инлайн клаву
     # update.message.reply_text(text=text,

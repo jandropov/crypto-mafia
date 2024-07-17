@@ -177,6 +177,8 @@ from telegram import KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, U
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 from tgbot.aaa_commands import profile
+from tgbot.aaa_commands import resources
+from tgbot.aaa_commands import statistics
 
 # Enable logging
 logging.basicConfig(
@@ -233,6 +235,8 @@ def run_pooling():
    # application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("start", onboarding_handlers.command_start))
     application.add_handler(MessageHandler(filters.Regex('🥷 Профиль'), profile.get_profile))
+    application.add_handler(MessageHandler(filters.Regex('📟 Статистика'), statistics.get_stat))
+    application.add_handler(MessageHandler(filters.Regex('💡 Информация'), resources.get_links))
 
 #     application.add_handler(MessageHandler(filters.StatusUpdate.WEB_APP_DATA, web_app_data))
 
