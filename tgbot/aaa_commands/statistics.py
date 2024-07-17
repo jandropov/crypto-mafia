@@ -1,7 +1,7 @@
 import datetime
 
 from django.utils import timezone
-from telegram import Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 
 from tgbot.models import User
 from django.contrib.auth.models import User as DjangoUser
@@ -21,13 +21,18 @@ async def get_stat(update: Update, context) -> None:
     rub_num = str(u.rub_num)
     quests_done_num = str(u.quests_done_num)
 
+    keyboard = [
+                [InlineKeyboardButton("🏆 Рейтинг", url = "http://app.crypto-mafia.xyz:8000/rating/")],
+            ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
 
     await update.message.reply_text("📟 Статистика:\n"+\
                               "├🎮Игрок: <b>" + identificator +'</b>'+\
                          "\n├🎲Авторитет: <b>" + score +'</b>'+\
                        "\n├💴Токены: <b>" + rub_num +'</b>'+\
                "\n└✔️Квесты: <b>" + quests_done_num+'</b>',
-               parse_mode="HTML")
+               parse_mode="HTML", reply_markup = reply_markup)
 
     # Создает инлайн клаву
     # update.message.reply_text(text=text,
