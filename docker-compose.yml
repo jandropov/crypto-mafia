@@ -21,34 +21,29 @@ services:
   web:
     build: .
     container_name: dtb_django
-   # command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    command: sh -c "python3 manage.py makemigrations && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && gunicorn --config gunicorn_config.py dtb.wsgi:application"
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#    command: sh -c "python3 manage.py makemigrations && python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && gunicorn --config gunicorn_config.py dtb.wsgi:application"
     volumes:
       - .:/code
-      - /var/www/static/:/var/www/static/
-#    ports:
-#      - "8000:8000"
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
     env_file:
       - ./.env
     depends_on:
       - db
 
-  nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    build: ./nginx/
-    ports:
-      - "80:80"
-      - "443:443"
-    env_file: .env
-    volumes:
-      - /var/www/static/:/var/www/static/
-      - ./nginx/conf.d/:/etc/nginx/conf.d/
-      - www-certs:/etc/letsencrypt
-    depends_on:
-      - web
+#  nginx:
+#    image: nginx:alpine
+#    restart: unless-stopped
+#    build: ./nginx/
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    env_file: .env
+#    volumes:
+#      - /var/www/static/:/var/www/static/
+#    depends_on:
+#      - web
 
   bot:
     build: .
@@ -58,6 +53,7 @@ services:
       - ./.env
     depends_on:
       - web
+
   celery:
     build: .
     container_name: dtb_celery
@@ -69,6 +65,7 @@ services:
     depends_on:
       - redis
       - web
+
   celery-beat:
     build: .
     container_name: dtb_beat
@@ -82,13 +79,13 @@ services:
       - celery
       - web
 
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - /var/certbot/conf:/etc/letsencrypt/:rw
-      - /var/certbot/www/:/var/www/certbot/:rw
-    depends_on:
-      - nginx
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
+#      - /var/certbot/conf:/etc/letsencrypt/:rw
+#      - /var/certbot/www/:/var/www/certbot/:rw
+#    depends_on:
+#      - nginx
 
 
 volumes:
