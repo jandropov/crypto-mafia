@@ -17,15 +17,16 @@ def get_user_in_db(update, context):
 
 @sync_to_async
 def save_in_db(u):
-    return u.save()
+    token_gen = DjangoUser.objects.make_random_password()
+    u.session_token = token_gen
+    save_in_db(u)
+    return token_gen
 
 
 async def get_profile(update: Update, context) -> None:
     u = await get_user_in_db(update, context)
 
-    token_gen = DjangoUser.objects.make_random_password()
-    u.session_token = token_gen
-    await save_in_db(u)
+    token_gen = await save_in_db(u)
 
     keyboard = [
             [InlineKeyboardButton("🥷 Профиль", url = "https://f102-2a09-bac5-31cc-369-00-57-157.ngrok-free.app:8000/me/token/"+token_gen)],
