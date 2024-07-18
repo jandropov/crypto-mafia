@@ -15,7 +15,7 @@ from django.contrib.auth.models import User as DjangoUser
 
 
 class User(CreateUpdateTracker):
-    user_id = models.IntegerField('ТГ-id', primary_key=True)  # telegram_id
+    user_id = models.BigIntegerField('ТГ-id', primary_key=True)  # telegram_id
     username = models.CharField('ТГ-username', max_length=32, **nb)
     first_name = models.CharField('ТГ-first_name', max_length=256)
     last_name = models.CharField('ТГ-last_name', max_length=256, **nb)
