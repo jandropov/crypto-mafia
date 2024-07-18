@@ -112,10 +112,11 @@ DATABASES = {
         "PORT": 5432,  # default postgres port
     }
 }
+
 # DATABASES = {
 #     'default': dj_database_url.config(conn_max_age=600, default="sqlite:///db.sqlite3"),
-#
 # }
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
